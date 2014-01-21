@@ -45,7 +45,7 @@ describe ZombieWasteland do
            zz*z.
            **...
            ^..*z
-           zz*zX)
+           zz*zS)
       end
 
       let :best_survial_strategy do
