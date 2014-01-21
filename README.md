@@ -4,7 +4,7 @@
 Your job is to survive. You can do this by avoiding zombies and navigating
 the horrific zombie infested wasteland to the safe house as quickly as possible.
 
-## Sample Map:
+### Sample Map:
 
 ```
 @*^^^
@@ -13,7 +13,9 @@ zz*z.
 ^..*z
 zz*zS
 ```
-## Map Key:
+
+### Map Key:
+
 ```
   @ = Survivor start
   S = The Safe house#
@@ -27,7 +29,7 @@ zz*zS
       3 = Mountain (^)
 ```
 
-## Best Solution:
+### Best Solution:
 
 ```
 ##^^^
