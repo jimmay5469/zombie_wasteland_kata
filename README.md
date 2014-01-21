@@ -38,3 +38,9 @@ zz#z.
 ^..#z
 zz*z#
 ```
+
+
+### Credits / Hint:
+
+This Kata is a modified version of Rubyquiz #98 by by Steven Davidovitz
+http://rubyquiz.com/quiz98.html
