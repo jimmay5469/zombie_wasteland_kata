@@ -1,0 +1,9 @@
+/bin
+/vendor/ruby
+
+.bundle
+.env
+*.log
+.rvmrc
+.rbenv
+.ruby-version
