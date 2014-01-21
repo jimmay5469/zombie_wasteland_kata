@@ -117,6 +117,7 @@ describe ZombieWasteland do
       let(:best_survial_strategy) { "good luck human" }
 
       it "safely navigates the gaint wasteland to the safehouse" do
+        pending
         expect(ZombieWasteland.navigate(gaint_wasteland)).to eq(best_survial_strategy)
       end
     end
