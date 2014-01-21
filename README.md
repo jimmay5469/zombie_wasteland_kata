@@ -18,7 +18,7 @@ zz*zS
 
 ```
   @ = Survivor start
-  S = The Safe house#
+  S = The Safe house
 
   Movement Cost for Terrain:
     Non-walkable:
