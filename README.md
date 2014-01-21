@@ -1,19 +1,20 @@
 
-Welcome to the Zombie Apocalypse!
+#Welcome to the Zombie Apocalypse!
 
 Your job is to survive. You can do this by avoiding zombies and navigating
 the horrific zombie infested wasteland to the safe house as quickly as possible.
-```
-Sample Map:
 
+## Sample Map:
+
+```
 @*^^^
 zz*z.
 **...
 ^..*z
 zz*zS
 ```
+## Map Key:
 ```
-Key:
   @ = Survivor start
   S = The Safe house#
 
@@ -25,9 +26,10 @@ Key:
       2 = Forest (*)
       3 = Mountain (^)
 ```
-```
-Best Solution:
 
+## Best Solution:
+
+```
 ##^^^
 zz#z.
 **.#.
