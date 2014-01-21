@@ -39,6 +39,7 @@ require_relative "../zombie_wasteland.rb"
 describe ZombieWasteland do
   describe "#navigate" do
     context "A 5 x 5 Wasteland" do
+      subject { ZombieWasteland.new(wasteland).navigate }
       let :wasteland do
         %q(@*^^^
            zz*z.
@@ -56,7 +57,7 @@ describe ZombieWasteland do
       end
 
       it "finds the shortest and cheapest route to the safehouse" do
-        expect(ZombieWasteland.navigate(wasteland)).to eq(best_survial_strategy)
+        expect(subject).to eq(best_survial_strategy)
       end
     end
 
@@ -118,7 +119,7 @@ describe ZombieWasteland do
 
       it "safely navigates the gaint wasteland to the safehouse" do
         pending
-        expect(ZombieWasteland.navigate(gaint_wasteland)).to eq(best_survial_strategy)
+        expect(subject).to eq(best_survial_strategy)
       end
     end
   end

@@ -4,8 +4,11 @@ class ZombieWasteland
                          **...
                          ^..*z
                          zz*zS)
+  def initialize(wasteland=DEFAULT_WASTELAND)
+    @wasteland = wasteland
+  end
 
-  def self.navigate(map=DEFAULT_WASTELAND)
+  def navigate
     "Your brains have been eaten. You are now Undead."
   end
 end
