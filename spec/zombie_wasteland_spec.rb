@@ -36,6 +36,40 @@ require_relative "../zombie_wasteland.rb"
 #  zz*z#
 #
 
+describe WastelandMap do
+  let(:wasteland) { WastelandMap.new(map) }
+  let :map do %q(@*^^^
+                 zz*z.
+                 **...
+                 ^..*z
+                 zz*zS)
+  end
+  describe "#get_map_string" do
+    subject { wasteland.get_map_string }
+    it "generates the correct string" do
+      expect(subject).to eq(map.gsub(/ +/, ''))
+    end
+  end
+  describe "#get_space" do
+    subject { wasteland.get_space([2,0]) }
+    it "gets the coorect value" do
+      expect(subject).to eq("^")
+    end
+  end
+  describe "#set_space" do
+    it "sets the coorect value" do
+      wasteland.set_space([2,0], "#")
+      expect(wasteland.get_space([2,0])).to eq("#")
+    end
+  end
+  describe "#find_symbol" do
+    subject { wasteland.find_symbol("@") }
+    it "finds the start symbol" do
+      expect(subject).to eq([0,0])
+    end
+  end
+end
+
 describe ZombieWasteland do
   let(:wasteland) { ZombieWasteland.new(map) }
   let :map do %q(@*^^^
@@ -45,66 +79,36 @@ describe ZombieWasteland do
                  zz*zS)
   end
 
-  describe "#finish" do
+  describe "#finish_point" do
     it do
       expect(wasteland.finish_point).to eq([4,4])
     end
   end
   
-  describe "#move_from" do
+  describe "#start_point" do
     it do
-      expect(wasteland.move_from(1,2)).to eq([2,3])
+      expect(wasteland.start_point).to eq([0,0])
     end
   end
-
-  describe "#valid_moves_from" do
-    let(:origin) { [0,0] }
-    let(:valid_moves) { [[1,0]] }
-
-    it "finds the valid moves" do
-      expect(wasteland.valid_moves_from(*origin)).to eq(valid_moves)
-    end
-
-    context "again" do
-      let(:origin) { [3,3] }
-      let(:valid_moves) { [[2, 2], [2, 3], [2, 4], [3, 2], [4, 2], [4, 4]] }
-
-      it "finds the valid moves" do
-        expect(wasteland.valid_moves_from(*origin)).to eq(valid_moves)
+  describe "#generate_throughpath_map" do
+    context "A 5 x 5 Wasteland" do
+      subject { wasteland.generate_throughpath_map }
+      let :throughpath_map do
+        %q(@8988
+           zz6z5
+           76444
+           8543z
+           zz5z1)
+      end
+      it "finds the shortest and cheapest route to the safehouse" do
+        expect(subject.get_map_string).to eq(throughpath_map.gsub(/ +/, ''))
       end
     end
   end
-
-  describe "#space_at" do
-    let(:map) { %q(@*
-                   .S) }
-    it "can be accessed by points" do
-      expect(wasteland.space_at(1,1)).to eq("S")
-    end
-    it "finds points well" do
-      expect(wasteland.space_at(1,0)).to eq("*")
-    end
-
-    it "return nil for out of bounds on the X axis" do
-      expect(wasteland.space_at(2,0)).to eq(nil)
-    end
-    it "returns nil for out of bounds on the Y axis" do
-      expect(wasteland.space_at(0,2)).to eq(nil)
-    end
-  end
-
+  
   describe "#navigate" do
-    let(:wasteland) { ZombieWasteland.new(map) }
-
     context "A 5 x 5 Wasteland" do
       subject { wasteland.navigate }
-      let :map do %q(@*^^^
-           zz*z.
-           **...
-           ^..*z
-           zz*zS)
-      end
-
       let :best_survial_strategy do
         %q(##^^^
            zz#z.
@@ -112,12 +116,9 @@ describe ZombieWasteland do
            ^..#z
            zz*z#)
       end
-
       it "gets the first move" do
         expect(wasteland.start_point).to eq([0,0])
-        expect(wasteland.move_from(0,0)).to eq([1,0])
       end
-
       it "finds the shortest and cheapest route to the safehouse" do
         expect(subject).to eq(best_survial_strategy.gsub(/ +/, ''))
       end
@@ -177,12 +178,9 @@ describe ZombieWasteland do
            .zzzzz^^.zz*^.z^^^**z^z.^z^z*..^*z^^*..*z^z**.*.^.
            z^**.z**..*^z^^^.^*^z^z*^.z*z.^.**.^.^^.z**^zz^z^S)
       end
-
       let(:best_survial_strategy) { "good luck human" }
       let(:solution) { wasteland.navigate }
-
       it "safely navigates the gaint map to the safehouse" do
-        puts solution
         expect(solution).to eq(best_survial_strategy)
       end
     end
